@@ -2,7 +2,7 @@
   {
     "kernelSource": {
       "name": "moto-g30-kernel",
-      "repo": "https://github.com/MotorolaMobilityLLC/kernel-msm",
+      "repo": "https://github.com/Jhonatan1413/kernel-msm/tree/MMI-S0RCS32.41-10-19-14",
       "branch": "MMI-S0RCS32.41-10-19-14",
       "device": "moto-g30"
     },
