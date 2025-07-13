@@ -46,16 +46,18 @@ jobs:
 
       withKernelSU: ${{ matrix.repos.withKernelSU }}
     steps:
-      - name: "✨ Create working dir"
-        run: |
-          mkdir -p ./${{ env.kernelDir }}
-          echo "Created directory: $(pwd)/${{ env.kernelDir }}"
-          ls -la ./
-
       - name: "😄 Checkout"
         uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}
+
+      - name: "✨ Create working dir"
+        run: |
+          echo "Current working directory before: $(pwd)"
+          mkdir -p ./${{ env.kernelDir }} || { echo "Failed to create directory"; exit 1; }
+          echo "Created directory: $(pwd)/${{ env.kernelDir }}"
+          ls -la ./
+          echo "Environment variable kernelDir: ${{ env.kernelDir }}"
 
       - name: "Install Python 2.7"
         run: |
@@ -78,7 +80,7 @@ jobs:
         run: |
           echo "Current directory: $(pwd)"
           ls -la
-          git clone --recursive --branch $kernelBranch $kernelRepo $kernelName --depth=1
+          git clone --recursive --branch $kernelBranch $kernelRepo $kernelName --depth=1 || { echo "Git clone failed"; exit 1; }
 
       - name: "💫 Get toolchains"
         working-directory: ./${{ env.kernelDir }}
