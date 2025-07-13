@@ -1,9 +1,10 @@
-[  {
+[
+  {
     "kernelSource": {
-      "name": "miku-KernelSU",
-      "repo": "https://github.com/PhamtomK12/kernel_xiaomi_odin",
-      "branch": "TDA",
-      "device": "odin"
+      "name": "moto-g30-kernel",
+      "repo": "https://github.com/MotorolaMobilityLLC/kernel-msm",
+      "branch": "MMI-S0RCS32.41-10-19-14",
+      "device": "moto-g30"
     },
     "withKernelSU": true,
     "toolchains": [
