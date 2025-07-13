@@ -47,10 +47,13 @@ jobs:
       withKernelSU: ${{ matrix.repos.withKernelSU }}
     steps:
       - name: "✨ Create working dir"
-        run: mkdir -p $kernelDir
+        run: |
+          mkdir -p ./${{ env.kernelDir }}
+          echo "Created directory: $(pwd)/${{ env.kernelDir }}"
+          ls -la ./
 
       - name: "😄 Checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}
 
@@ -69,11 +72,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential bc curl git zip ftp gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi libssl-dev lftp zstd wget libfl-dev python3 libarchive-tools
-          # Removido 'python2' da lista, pois será instalado manualmente
 
       - name: "🌟 Clone kernel source => (${{ env.kernelRepo }})"
         working-directory: ./${{ env.kernelDir }}
         run: |
+          echo "Current directory: $(pwd)"
+          ls -la
           git clone --recursive --branch $kernelBranch $kernelRepo $kernelName --depth=1
 
       - name: "💫 Get toolchains"
